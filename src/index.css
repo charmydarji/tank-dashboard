@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Brand */
+  --brand: #1fa39d;        /* primary teal */
+  --accent: #78b80f;       /* positive / savings */
+
+  /* UI */
+  --text: #0f172a;         /* main text */
+  --muted: #64748b;        /* secondary text */
+  --surface: #ffffff;      /* cards */
+  --border: rgba(15, 23, 42, 0.12);
+
+  /* Charts */
+  --grid: rgba(15, 23, 42, 0.08);
+}
+
+/* Global defaults */
+body {
+  background: #f8fafc;
+  color: var(--text);
+}
