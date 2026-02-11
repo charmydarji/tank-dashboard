@@ -1,73 +1,183 @@
-# React + TypeScript + Vite
+# Tank Operations Analytics Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live Demo: https://tank-dashboard-six.vercel.app/
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is a **frontend analytics dashboard** built as part of a frontend coding exercise.  
+The goal was to visualize and explore operational data from an industrial factory that runs multiple tanks. Each data entry represents one operation cycle of a tank and includes timing, water usage, energy usage, and estimated savings.
 
-## React Compiler
+The dashboard helps answer questions like:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- How much water and energy are being used overall?
+- How does water usage change over time?
+- Which tanks use the most water?
+- How much water is saved compared to usage?
+- How long do tank cycles typically last?
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Problem Statement
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Given a JSON dataset containing tank operation cycles, the task was to:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Derive meaningful KPIs from raw data
+- Visualize insights using charts
+- Allow users to filter and explore the data
+- Present everything in a clean, easy-to-understand UI
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Solution Summary
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+I built a **React + TypeScript** dashboard that:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Loads the dataset asynchronously
+- Computes KPIs like total water usage, energy usage, average cycle duration, and water saved
+- Visualizes insights using multiple chart types
+- Allows filtering by:
+  - Tank (multi-select)
+  - Date range (last X days)
+  - Most recent N cycles
+- Uses a simple, consistent visual design with limited colors
+
+The project is intentionally kept simple and readable so that someone new to React or data visualization can understand the flow.
+
+---
+
+## Features
+
+### KPIs
+
+- Total Water Used
+- Total Energy Used
+- Average Cycle Duration
+- Total Water Saved
+
+### Charts
+
+- **Water Usage Over Time** (Line chart)
+- **Water Usage by Tank** (Horizontal bar chart)
+- **Water Used vs Water Saved** (Diverging bar chart)
+- **Cycle Duration Distribution** (Histogram)
+- **Savings vs Water Usage** (Scatter plot)
+
+### Filters
+
+- Select one or more tanks
+- Filter by recent days
+- Limit to last N cycles
+- Reset all filters
+
+---
+
+## Tech Stack
+
+- **React** – UI and component structure
+- **TypeScript** – Type safety and clarity
+- **Recharts** – Data visualization
+- **Tailwind CSS** – Layout and spacing
+- **Vite** – Development and build tooling
+
+---
+
+## Architectural & Technical Choices
+
+### React + TypeScript
+
+- Makes data flow explicit and easier to reason about
+- Prevents many runtime errors when dealing with numeric data
+
+### Recharts
+
+- Simple API for common charts
+- Declarative and readable
+- Easy to customize without heavy configuration
+
+### Client-side data processing
+
+- Dataset is small enough to process in memory
+- Keeps the solution simple and avoids unnecessary backend complexity
+
+### Component separation
+
+- Each chart is its own component
+- Easier to explain, test, and modify independently
+- Improves readability for reviewers
+
+---
+
+## Design & UX Decisions
+
+- Limited color palette (brand + accent colors only)
+- Clear labels and tooltips for all charts
+- Charts sized consistently to avoid visual clutter
+- Full-width layout used only where comparison benefits from more space
+
+---
+
+## Trade-offs & Limitations
+
+### Trade-offs Made
+
+- No backend or persistent storage
+- No authentication or user accounts
+- No server-side aggregation
+
+### Omissions (Intentional)
+
+- Advanced chart interactions (zoom, brush, drill-down)
+- Export/download features
+- Real-time updates
+
+### What I Would Do With More Time
+
+- Add unit tests for data transformations
+- Improve accessibility (ARIA labels, keyboard navigation)
+- Add chart legends and toggles
+- Support CSV upload instead of fixed JSON
+- Add performance optimizations for large datasets
+
+---
+
+## AI Tool Usage Disclosure
+
+AI tools (ChatGPT) were used **as a development assistant**, specifically for:
+
+- Clarifying React + TypeScript patterns
+- Improving code readability and simplification
+- Discussing chart selection and data transformation approaches
+
+All code was **written, reviewed, and understood by me**.  
+I did **not** copy-paste complete solutions blindly; any AI-assisted suggestions were adapted and simplified to match my understanding and design goals.
+
+---
+
+## Setup & Running the Project
+
+### Prerequisites
+
+- Node.js (v18+ recommended)
+- npm or yarn
+
+## Installation & Running Locally
+
+1. Clone the repository
+
+   ```bash
+   git clone <repo-url>
+   cd tank-dashboard
+
+   ```
+
+2. Install Dependencies
+
+   ```bash
+   npm install
+   ```
+
+3. Run Locally
+
+   ```bash
+   npm run dev
+   ```
