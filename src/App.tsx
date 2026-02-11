@@ -5,6 +5,7 @@ import { uniqueTanks } from "./utils";
 import { Filters } from "./components/Filters";
 import KpiCards from "./components/KpiCards";
 import { WaterTrendLine } from "./components/charts/WaterTrendLine";
+import { WaterByTankBar } from "./components/charts/WaterByTankBar";
 
 export default function App() {
   // 1) Data loading state
@@ -157,8 +158,9 @@ export default function App() {
         />
 
         <KpiCards cycles={filteredCycles} />
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <WaterTrendLine cycles={filteredCycles} />
+          <WaterByTankBar cycles={filteredCycles} />
         </div>
       </main>
     </div>
