@@ -7,7 +7,7 @@ import KpiCards from "./components/KpiCards";
 import { WaterTrendLine } from "./components/charts/WaterTrendLine";
 import { WaterByTankBar } from "./components/charts/WaterByTankBar";
 import { WaterUsedVsSavedDiverging } from "./components/charts/WaterUsedVsSavedDiverging";
-
+import { DurationHistogram } from "./components/charts/DurationHistogram";
 
 export default function App() {
   // 1) Data loading state
@@ -166,6 +166,7 @@ export default function App() {
           <div className="lg:col-span-2">
             <WaterUsedVsSavedDiverging cycles={filteredCycles} />
           </div>
+          <DurationHistogram cycles={filteredCycles} />
         </div>
       </main>
     </div>
