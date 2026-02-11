@@ -4,6 +4,7 @@ import type { Cycle } from "./types";
 import { uniqueTanks } from "./utils";
 import { Filters } from "./components/Filters";
 import KpiCards from "./components/KpiCards";
+import { WaterTrendLine } from "./components/charts/WaterTrendLine";
 
 export default function App() {
   // 1) Data loading state
@@ -89,7 +90,7 @@ export default function App() {
             <span style={{ color: "var(--brand)" }}>Dashboard</span>
           </h1>
           <p className="mt-1 text-sm" style={{ color: "var(--muted)" }}>
-            KPIs and filters for tank operation cycles
+            KPIs, filters and charts for tank operation cycles
           </p>
         </div>
       </header>
@@ -156,6 +157,9 @@ export default function App() {
         />
 
         <KpiCards cycles={filteredCycles} />
+        <div className="grid grid-cols-1 gap-4">
+          <WaterTrendLine cycles={filteredCycles} />
+        </div>
       </main>
     </div>
   );

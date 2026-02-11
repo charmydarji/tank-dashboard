@@ -24,6 +24,8 @@ export function Filters({
   setDateWindowDays,
   onReset,
 }: FiltersProps) {
+  // Toggle logic keeps filter state simple and predictable
+  // (no special "select all" case needed)
   function toggleTank(tank: string) {
     setSelectedTanks((prev) => {
       if (prev.includes(tank)) return prev.filter((t) => t !== tank);
@@ -36,7 +38,7 @@ export function Filters({
       className="rounded-xl border p-4 shadow-sm space-y-4"
       style={{ background: "var(--surface)", borderColor: "var(--border)" }}
     >
-      {/* Tanks */}
+      {/* Tank selection */}
       <div>
         <p className="mb-2 text-xs font-medium" style={{ color: "var(--muted)" }}>
           Tanks (select one or more)
@@ -60,6 +62,7 @@ export function Filters({
           ))}
         </div>
 
+        {/* Empty selection = no filter applied */}
         {selectedTanks.length === 0 && (
           <p className="mt-2 text-xs" style={{ color: "var(--muted)" }}>
             All tanks selected
@@ -67,12 +70,14 @@ export function Filters({
         )}
       </div>
 
-      {/* Dropdowns */}
+      {/* Time & volume filters */}
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         <div>
           <label className="text-xs font-medium" style={{ color: "var(--muted)" }}>
             Date range
           </label>
+
+          {/* Filters relative to most recent cycle */}
           <select
             value={dateWindowDays}
             onChange={(e) => setDateWindowDays(Number(e.target.value))}
@@ -94,6 +99,8 @@ export function Filters({
           <label className="text-xs font-medium" style={{ color: "var(--muted)" }}>
             Recent cycles
           </label>
+
+          {/* Limits dataset size for performance + readability */}
           <select
             value={lastN}
             onChange={(e) => setLastN(Number(e.target.value))}
@@ -113,7 +120,7 @@ export function Filters({
         </div>
       </div>
 
-      {/* Reset */}
+      {/* Reset all filters back to defaults */}
       <div className="flex justify-end">
         <button
           onClick={onReset}
