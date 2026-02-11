@@ -8,6 +8,7 @@ import { WaterTrendLine } from "./components/charts/WaterTrendLine";
 import { WaterByTankBar } from "./components/charts/WaterByTankBar";
 import { WaterUsedVsSavedDiverging } from "./components/charts/WaterUsedVsSavedDiverging";
 import { DurationHistogram } from "./components/charts/DurationHistogram";
+import { SavingsVsWaterScatter } from "./components/charts/SavingsVsWaterScatter";
 
 export default function App() {
   // 1) Data loading state
@@ -167,6 +168,7 @@ export default function App() {
             <WaterUsedVsSavedDiverging cycles={filteredCycles} />
           </div>
           <DurationHistogram cycles={filteredCycles} />
+          <SavingsVsWaterScatter cycles={filteredCycles}></SavingsVsWaterScatter>
         </div>
       </main>
     </div>
